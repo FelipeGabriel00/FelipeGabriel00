@@ -1,0 +1,24 @@
+# Realiza conexão com servidor para exec da PROC
+server = @@SERVERNAME
+database = @@DATABASE
+
+try:
+    #conexao = pyodbc.connect('DRIVER={SQL SERVER};SERVER=' + server + ';DATABASE=' + database + ';UID=' + login + ';PWD=' + senha)
+    conexao = pyodbc.connect('DRIVER={SQL SERVER};SERVER=' + server + ';DATABASE=' + database + ';Trusted_Connection=yes')
+    cursor= conexao.cursor()
+
+    print ('Conectado com sucesso!')
+    print ('Executando Procedure...')
+
+except:
+    print ('Falha na conexão.')
+
+
+try:
+    sql = "exec @@PROCEDURE"
+    cursor.execute(sql)
+    cursor.commit()
+    print ('Executado @@PROCEDURE')
+except:
+    print ("Falha na execução @@PROCEDURE")
+
