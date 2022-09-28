@@ -1,0 +1,32 @@
+""""
+    Manipula arquivos do Excel.
+    Tratamento de xls para xlsx e xlsx para CSV
+    Após isso, deleta arquivos de apoio
+"""
+
+import pandas as pd
+import pyexcel as p
+
+
+
+#Salvar Arquivo xls em xlsx
+p.save_book_as(file_name=r"diretorio_arquivo_XLS",
+               dest_file_name=r"diretorio_a_salvar_arquivo_XLSX")
+print("Arquivo xlsx criado com sucesso.")
+
+arquivo = pd.read_excel(r"diretorio_arquivo_XLSX")
+arquivo.to_csv (r"diretorio_a_salvar_arquivo_CSV",
+                index = None,
+                header=True)
+
+df = pd.DataFrame(pd.read_csv(r"diretorio_arquivo_CSV"))
+
+print ("Arquivo importado!")
+df
+
+# Deleta Arquivos
+if os.path.exists(r"diretorio_arquivo_a_deletar"):
+    os.remove(r"diretorio_arquivo_a_deletar")
+    print("Arquivo deletado")
+else:
+    print("Falha ao deletar arquivo")
